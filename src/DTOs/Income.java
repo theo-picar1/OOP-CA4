@@ -62,4 +62,9 @@ public class Income {
     public void setDate(Date earned) {
         this.earned = earned;
     }
+
+    @Override
+    public String toString() {
+        return "Income{" + "id = " + id + ", title = " + title + ", amount = " + amount + ", date earned = " + earned + '}';
+    }
 }
