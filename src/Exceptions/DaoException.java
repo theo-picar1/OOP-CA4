@@ -1,7 +1,11 @@
 package Exceptions;
 
-public class DaoException extends RuntimeException {
-    public DaoException(String message) {
-        super(message);
+import java.sql.SQLException;
+
+public class DaoException extends SQLException {
+    public DaoException() {
+        // Don't know the point of this
     }
+
+    public DaoException(String aMessage) { super(aMessage); }
 }
