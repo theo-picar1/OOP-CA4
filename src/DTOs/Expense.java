@@ -73,4 +73,9 @@ public class Expense {
     public void setDate(Date incurred) {
         this.incurred = incurred;
     }
+
+    @Override
+    public String toString() {
+        return "Expense{" + "ID = " + id + ", Title = " + title + ", Category = " + category + ", Amount = €" + amount + ", Date Incurred = " + incurred + '}';
+    }
 }
