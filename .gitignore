@@ -6,3 +6,8 @@ target/classes/DAOs/MySqlDao.class
 target/classes/DAOs/MySqlIncomeDao.class
 target/classes/DTOs/Income.class
 target/classes/Main.class
+src/DAOs/ExpenseDaoInterface.java
+target/classes/DAOs/ExpenseDaoInterface.class
+target/classes/DAOs/MySqlExpenseDao.class
+target/classes/DTOs/Expense.class
+target/classes/Main.class
