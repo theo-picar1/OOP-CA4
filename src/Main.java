@@ -36,7 +36,7 @@ public class Main {
             System.out.println("Total money spent is: €" +totalSpent);
 
             // addExpense()...
-            System.out.println("Executing addExpense()...");
+            System.out.println("\nExecuting addExpense()...");
             String title = "testTitle";
             String category = "testCategory";
             double amount = 10.10;
@@ -53,6 +53,13 @@ public class Main {
                     System.out.println(expenseRow.toString());
                 }
             }
+
+            // deleteExpenseById()
+            System.out.println("\nExecuting deleteExpenseById()...");
+            int expenseId = 4;
+
+            IExpenseDao.deleteExpenseById(expenseId);
+            System.out.println("Successfully deleted row with ID " +expenseId);
 
             // findAllIncome()...
             System.out.println("\nExecuting findAllIncome()...");
@@ -72,7 +79,7 @@ public class Main {
             System.out.println("Total money earned is: €" +totalEarned);
 
             // addIncome()...
-            System.out.println("Executing addIncome()...");
+            System.out.println("\nExecuting addIncome()...");
             String incTitle = "testTitle";
             double incAmount = 10.10;
             String earned = "2025-01-14";
@@ -88,6 +95,13 @@ public class Main {
                     System.out.println(incomeRow.toString());
                 }
             }
+
+            // deleteExpenseById()
+            System.out.println("\nExecuting deleteExpenseById()...");
+            int incomeId = 4;
+
+            IExpenseDao.deleteExpenseById(incomeId);
+            System.out.println("Successfully deleted row with ID " +incomeId);
         }
         catch (DaoException e) {
             e.printStackTrace();

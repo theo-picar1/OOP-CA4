@@ -97,6 +97,38 @@ public class MySqlExpenseDao extends MySqlDao implements ExpenseDaoInterface{
                 throw new DaoException("addExpense() error!" + e.getMessage());
             }
         }
+    }
 
+    @Override
+    public void deleteExpenseById(int id) throws DaoException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+
+        try {
+            connection = this.getConnection();
+
+            String deleteQuery = "DELETE FROM Expenses WHERE id = ?";
+            preparedStatement = connection.prepareStatement(deleteQuery);
+
+            preparedStatement.setInt(1, id);
+
+            preparedStatement.executeUpdate();
+        }
+        catch(SQLException e) {
+            throw new DaoException("deleteExpenseById() error! " + e.getMessage());
+        }
+        finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                if (connection != null) {
+                    freeConnection(connection);
+                }
+            }
+            catch (SQLException e) {
+                throw new DaoException("deleteExpenseById() error!" + e.getMessage());
+            }
+        }
     }
 }
