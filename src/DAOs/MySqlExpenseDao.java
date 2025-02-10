@@ -7,23 +7,24 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class MySqlExpenseDao extends MySqlDao implements ExpenseDaoInterface{
+    static List<Expense> expenseList = new ArrayList<>();
+
     @Override
     public List<Expense> findAllExpenses() throws DaoException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        List<Expense> expenseList = new ArrayList<>();
 
         try {
             connection = this.getConnection();
 
-            String query = "SELECT * FROM Expenses";
-            preparedStatement = connection.prepareStatement(query);
+            String selectAllQuery = "SELECT * FROM Expenses";
+            preparedStatement = connection.prepareStatement(selectAllQuery);
 
             resultSet = preparedStatement.executeQuery();
 
@@ -59,5 +60,43 @@ public class MySqlExpenseDao extends MySqlDao implements ExpenseDaoInterface{
         }
 
         return expenseList;
+    }
+
+    @Override
+    public void addExpense(String title, String category, double amount, String incurred) throws DaoException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+
+        try {
+            connection = this.getConnection();
+
+            String addQuery = "INSERT INTO Expenses VALUES(null, ?, ?, ?, ?)";
+            preparedStatement = connection.prepareStatement(addQuery);
+
+            preparedStatement.setString(1, title);
+            preparedStatement.setString(2, category);
+            preparedStatement.setDouble(3, amount);
+            preparedStatement.setDate(4, Date.valueOf(incurred));
+
+            preparedStatement.executeUpdate();
+
+        }
+        catch(SQLException e) {
+            throw new DaoException("addExpense() error! " + e.getMessage());
+        }
+        finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                if (connection != null) {
+                    freeConnection(connection);
+                }
+            }
+            catch (SQLException e) {
+                throw new DaoException("addExpense() error!" + e.getMessage());
+            }
+        }
+
     }
 }

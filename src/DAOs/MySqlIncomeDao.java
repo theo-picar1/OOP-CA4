@@ -7,8 +7,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class MySqlIncomeDao extends MySqlDao implements IncomeDaoInterface {
@@ -59,5 +59,41 @@ public class MySqlIncomeDao extends MySqlDao implements IncomeDaoInterface {
         }
 
         return incomeList;
+    }
+
+    @Override
+    public void addIncome(String title, double amount, String earned) throws DaoException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+
+        try {
+            connection = this.getConnection();
+
+            String addQuery = "INSERT INTO Income VALUES(null, ?, ?, ?)";
+            preparedStatement = connection.prepareStatement(addQuery);
+
+            preparedStatement.setString(1, title);
+            preparedStatement.setDouble(2, amount);
+            preparedStatement.setDate(3, Date.valueOf(earned));
+
+            preparedStatement.executeUpdate();
+
+        }
+        catch(SQLException e) {
+            throw new DaoException("addIncome() error! " + e.getMessage());
+        }
+        finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                if (connection != null) {
+                    freeConnection(connection);
+                }
+            }
+            catch (SQLException e) {
+                throw new DaoException("addIncome() error!" + e.getMessage());
+            }
+        }
     }
 }

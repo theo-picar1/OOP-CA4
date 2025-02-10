@@ -8,6 +8,8 @@ import DTOs.Expense;
 
 import Exceptions.DaoException;
 
+import java.util.Date;
+
 import java.util.List;
 public class Main {
     public static void main(String[] args) {
@@ -15,10 +17,11 @@ public class Main {
         ExpenseDaoInterface IExpenseDao = new MySqlExpenseDao();
 
         try {
-            //Expense
+            // findAllExpenses()...
             System.out.println("Executing findAllExpenses()...");
-            List<Expense> expenseList = IExpenseDao.findAllExpenses();
             double totalSpent = 0;
+
+            List<Expense> expenseList = IExpenseDao.findAllExpenses();
 
             if(expenseList.isEmpty()) {
                 System.out.println("Expense table is empty! Please add some data first.");
@@ -32,7 +35,26 @@ public class Main {
 
             System.out.println("Total money spent is: €" +totalSpent);
 
-            // Income
+            // addExpense()...
+            System.out.println("Executing addExpense()...");
+            String title = "testTitle";
+            String category = "testCategory";
+            double amount = 10.10;
+            String incurred = "2025-01-14";
+
+            IExpenseDao.addExpense(title, category, amount, incurred);
+            System.out.println("Successfully added details...");
+
+            if(expenseList.isEmpty()) {
+                System.out.println("Expense table is empty! Please add some data first.");
+            }
+            else {
+                for(Expense expenseRow : expenseList) {
+                    System.out.println(expenseRow.toString());
+                }
+            }
+
+            // findAllIncome()...
             System.out.println("\nExecuting findAllIncome()...");
             List<Income> incomeList = IIncomeDao.findAllIncome();
             double totalEarned = 0;
@@ -48,6 +70,24 @@ public class Main {
             }
 
             System.out.println("Total money earned is: €" +totalEarned);
+
+            // addIncome()...
+            System.out.println("Executing addIncome()...");
+            String incTitle = "testTitle";
+            double incAmount = 10.10;
+            String earned = "2025-01-14";
+
+            IIncomeDao.addIncome(incTitle, incAmount, earned);
+            System.out.println("Successfully added details...");
+
+            if(incomeList.isEmpty()) {
+                System.out.println("Income table is empty! Please add some data first.");
+            }
+            else {
+                for(Income incomeRow : incomeList) {
+                    System.out.println(incomeRow.toString());
+                }
+            }
         }
         catch (DaoException e) {
             e.printStackTrace();
