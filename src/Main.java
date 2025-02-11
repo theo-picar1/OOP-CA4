@@ -104,23 +104,39 @@ public class Main {
         try {
             if(choice == 2) {
                 // addExpense()...
-                System.out.println("\nExecuting addExpense()...");
-                String title = "testTitle";
-                String category = "testCategory";
-                double amount = 10.10;
-                String incurred = "2025-01-14";
+                String title, category, incurred;
+                double amount;
+
+                System.out.println("Please enter your new title...");
+                title = sc.next();
+
+                System.out.println("Please enter your new category...");
+                category = sc.next();
+
+                System.out.println("Please enter the amount you spent");
+                amount = sc.nextDouble();
+
+                System.out.println("Finally, please enter the date you spent this (YYYY-MM-DD)");
+                incurred = sc.next();
 
                 IExpenseDao.addExpense(title, category, amount, incurred);
                 System.out.println("Successfully added details...");
             }
             else {
                 // addIncome()...
-                System.out.println("\nExecuting addIncome()...");
-                String incTitle = "testTitle";
-                double incAmount = 10.10;
-                String earned = "2025-01-14";
+                String title, earned;
+                double amount;
 
-                IIncomeDao.addIncome(incTitle, incAmount, earned);
+                System.out.println("Please enter your new title...");
+                title = sc.next();
+
+                System.out.println("Please enter the amount you spent");
+                amount = sc.nextDouble();
+
+                System.out.println("Finally, please enter the date you spent this (YYYY-MM-DD)");
+                earned = sc.next();
+
+                IIncomeDao.addIncome(title, amount, earned);
                 System.out.println("Successfully added details...");
             }
 
@@ -136,19 +152,19 @@ public class Main {
         try {
             if(choice == 3) {
                 // deleteExpenseById()
-                System.out.println("\nExecuting deleteExpenseById()...");
-                int expenseId = 4;
+                System.out.println("\nPlease enter the row ID you would like to delete:");
+                int id = sc.nextInt();
 
-                IExpenseDao.deleteExpenseById(expenseId);
-                System.out.println("Successfully deleted row with ID " +expenseId);
+                IExpenseDao.deleteExpenseById(id);
+                System.out.println("Successfully deleted row with ID " +id);
             }
             else {
-                // deleteExpenseById()
-                System.out.println("\nExecuting deleteExpenseById()...");
-                int incomeId = 4;
+                // deleteIncomeById()
+                System.out.println("\nPlease enter the row ID you would like to delete:");
+                int id = sc.nextInt();
 
-                IExpenseDao.deleteExpenseById(incomeId);
-                System.out.println("Successfully deleted row with ID " +incomeId);
+                IIncomeDao.deleteIncomeById(id);
+                System.out.println("Successfully deleted row with ID " +id);
             }
 
             System.out.println();

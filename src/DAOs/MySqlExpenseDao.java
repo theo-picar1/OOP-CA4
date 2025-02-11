@@ -12,10 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MySqlExpenseDao extends MySqlDao implements ExpenseDaoInterface{
-    static List<Expense> expenseList = new ArrayList<>();
-
     @Override
     public List<Expense> findAllExpenses() throws DaoException {
+        List<Expense> expenseList = new ArrayList<>();
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
