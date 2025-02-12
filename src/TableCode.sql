@@ -29,3 +29,7 @@ insert into Income(title, amount, earned) values
     ('Babysitting', 60.18, '2025-01-14'),
 	('Bar work', 100.87, '2024-02-09'),
     ('Birthday', 20.13, '2024-03-29');
+
+ALTER TABLE Expenses MODIFY COLUMN title VARCHAR(20) NOT NULL;
+ALTER TABLE Expenses MODIFY COLUMN category VARCHAR(20) NOT NULL;
+ALTER TABLE Income MODIFY COLUMN title VARCHAR(20) NOT NULL;
