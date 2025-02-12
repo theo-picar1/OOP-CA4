@@ -65,6 +65,6 @@ public class Income {
 
     @Override
     public String toString() {
-        return "Income{" + "ID = " + id + ", Title = " + title + ", Amount = " + amount + ", Date Earned = " + earned + '}';
+        return "ID = " + id + ", Title = " + title + ", Amount = " + amount + ", Date Earned = " + earned;
     }
 }

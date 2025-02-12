@@ -68,7 +68,7 @@ public class Main {
                 } else {
                     for (Expense expenseRow : expenseList) {
                         totalSpent += expenseRow.getAmount();
-                        System.out.println(expenseRow.toString());
+                        System.out.println("{" +expenseRow.toString()+ "}");
                     }
                 }
 
@@ -86,7 +86,7 @@ public class Main {
                 else {
                     for(Income incomeRow : incomeList) {
                         totalEarned += incomeRow.getAmount();
-                        System.out.println(incomeRow.toString());
+                        System.out.println("{" +incomeRow.toString()+ "}");
                     }
                 }
 
@@ -112,14 +112,14 @@ public class Main {
                 System.out.println("Please enter your new title...");
                 title = Methods.validateString();
 
-                System.out.println("Please enter your new category...");
-                category = Methods.validateString();
-
                 System.out.println("Please enter the amount you spent");
                 amount = Methods.validateAmount();
 
-                System.out.println("Finally, please enter the date you spent this (YYYY-MM-DD)");
+                System.out.println("Please enter the date you spent this (YYYY-MM-DD)");
                 incurred = Methods.validateDate();
+
+                System.out.println("Finally, please enter your new category...");
+                category = Methods.validateString();
 
                 int rowsAffected = IExpenseDao.addExpense(title, category, amount, incurred);
 
