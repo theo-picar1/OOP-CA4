@@ -53,6 +53,7 @@ public class Main {
         }
     }
 
+    // SELECT * FROM tableName
     public static void displayATable(int choice) {
         try {
             if (choice == 1) {
@@ -100,6 +101,7 @@ public class Main {
         }
     }
 
+    // INSERT INTO tableName VALUES (x, y, z)
     public static void addRowToTable(int choice) {
         try {
             if(choice == 2) {
@@ -108,16 +110,16 @@ public class Main {
                 double amount;
 
                 System.out.println("Please enter your new title...");
-                title = sc.next();
+                title = Methods.validateString();
 
                 System.out.println("Please enter your new category...");
-                category = sc.next();
+                category = Methods.validateString();
 
                 System.out.println("Please enter the amount you spent");
-                amount = sc.nextDouble();
+                amount = Methods.validateAmount();
 
                 System.out.println("Finally, please enter the date you spent this (YYYY-MM-DD)");
-                incurred = sc.next();
+                incurred = Methods.validateDate();
 
                 IExpenseDao.addExpense(title, category, amount, incurred);
                 System.out.println("Successfully added details...");
@@ -128,13 +130,13 @@ public class Main {
                 double amount;
 
                 System.out.println("Please enter your new title...");
-                title = sc.next();
+                title = Methods.validateString();
 
                 System.out.println("Please enter the amount you spent");
-                amount = sc.nextDouble();
+                amount = Methods.validateAmount();
 
                 System.out.println("Finally, please enter the date you spent this (YYYY-MM-DD)");
-                earned = sc.next();
+                earned = Methods.validateDate();
 
                 IIncomeDao.addIncome(title, amount, earned);
                 System.out.println("Successfully added details...");
@@ -148,6 +150,7 @@ public class Main {
         }
     }
 
+    // DELETE FROM tableName WHERE ID = x
     public static void deleteRowFromTable(int choice) {
         try {
             if(choice == 3) {
@@ -161,7 +164,7 @@ public class Main {
             else {
                 // deleteIncomeById()
                 System.out.println("\nPlease enter the row ID you would like to delete:");
-                int id = sc.nextInt();
+                int id = Methods.validateInt();
 
                 IIncomeDao.deleteIncomeById(id);
                 System.out.println("Successfully deleted row with ID " +id);
