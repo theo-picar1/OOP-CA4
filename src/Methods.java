@@ -98,7 +98,7 @@ public class Methods {
             System.out.println(successful);
         }
         else {
-            System.err.println("0 rows affected. Try again and check your inputs for syntax errors");
+            System.err.println("0 rows affected in table");
         }
     }
 }
