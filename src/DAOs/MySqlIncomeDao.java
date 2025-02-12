@@ -62,9 +62,10 @@ public class MySqlIncomeDao extends MySqlDao implements IncomeDaoInterface {
     }
 
     @Override
-    public void addIncome(String title, double amount, String earned) throws DaoException {
+    public int addIncome(String title, double amount, String earned) throws DaoException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
+        int rowsAffected;
 
         try {
             connection = this.getConnection();
@@ -76,7 +77,7 @@ public class MySqlIncomeDao extends MySqlDao implements IncomeDaoInterface {
             preparedStatement.setDouble(2, amount);
             preparedStatement.setDate(3, Date.valueOf(earned));
 
-            preparedStatement.executeUpdate();
+            rowsAffected = preparedStatement.executeUpdate();
 
         }
         catch(SQLException e) {
@@ -95,12 +96,15 @@ public class MySqlIncomeDao extends MySqlDao implements IncomeDaoInterface {
                 throw new DaoException("addIncome() error!" + e.getMessage());
             }
         }
+
+        return rowsAffected;
     }
 
     @Override
-    public void deleteIncomeById(int id) throws DaoException {
+    public int deleteIncomeById(int id) throws DaoException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
+        int rowsAffected;
 
         try {
             connection = this.getConnection();
@@ -110,7 +114,7 @@ public class MySqlIncomeDao extends MySqlDao implements IncomeDaoInterface {
 
             preparedStatement.setInt(1, id);
 
-            preparedStatement.executeUpdate();
+            rowsAffected = preparedStatement.executeUpdate();
         }
         catch(SQLException e) {
             throw new DaoException("deleteIncomeById() error! " + e.getMessage());
@@ -128,5 +132,7 @@ public class MySqlIncomeDao extends MySqlDao implements IncomeDaoInterface {
                 throw new DaoException("deleteIncomeById() error!" + e.getMessage());
             }
         }
+
+        return rowsAffected;
     }
 }
