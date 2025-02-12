@@ -92,4 +92,13 @@ public class Methods {
             }
         }
     }
+
+    public static void rowsAffectedMessage(int rowsAffected, String successful) {
+        if(rowsAffected > 0) {
+            System.out.println(successful);
+        }
+        else {
+            System.err.println("0 rows affected. Try again and check your inputs for syntax errors");
+        }
+    }
 }

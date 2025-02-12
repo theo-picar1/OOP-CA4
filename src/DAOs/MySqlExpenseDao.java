@@ -62,9 +62,10 @@ public class MySqlExpenseDao extends MySqlDao implements ExpenseDaoInterface{
     }
 
     @Override
-    public void addExpense(String title, String category, double amount, String incurred) throws DaoException {
+    public int addExpense(String title, String category, double amount, String incurred) throws DaoException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
+        int rowsAffected;
 
         try {
             connection = this.getConnection();
@@ -77,8 +78,7 @@ public class MySqlExpenseDao extends MySqlDao implements ExpenseDaoInterface{
             preparedStatement.setDouble(3, amount);
             preparedStatement.setDate(4, Date.valueOf(incurred));
 
-            preparedStatement.executeUpdate();
-
+            rowsAffected = preparedStatement.executeUpdate();
         }
         catch(SQLException e) {
             throw new DaoException("addExpense() error! " + e.getMessage());
@@ -96,12 +96,15 @@ public class MySqlExpenseDao extends MySqlDao implements ExpenseDaoInterface{
                 throw new DaoException("addExpense() error!" + e.getMessage());
             }
         }
+
+        return rowsAffected;
     }
 
     @Override
-    public void deleteExpenseById(int id) throws DaoException {
+    public int deleteExpenseById(int id) throws DaoException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
+        int rowsAffected;
 
         try {
             connection = this.getConnection();
@@ -111,7 +114,7 @@ public class MySqlExpenseDao extends MySqlDao implements ExpenseDaoInterface{
 
             preparedStatement.setInt(1, id);
 
-            preparedStatement.executeUpdate();
+            rowsAffected = preparedStatement.executeUpdate();
         }
         catch(SQLException e) {
             throw new DaoException("deleteExpenseById() error! " + e.getMessage());
@@ -129,5 +132,7 @@ public class MySqlExpenseDao extends MySqlDao implements ExpenseDaoInterface{
                 throw new DaoException("deleteExpenseById() error!" + e.getMessage());
             }
         }
+
+        return rowsAffected;
     }
 }

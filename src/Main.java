@@ -121,8 +121,9 @@ public class Main {
                 System.out.println("Finally, please enter the date you spent this (YYYY-MM-DD)");
                 incurred = Methods.validateDate();
 
-                IExpenseDao.addExpense(title, category, amount, incurred);
-                System.out.println("Successfully added details...");
+                int rowsAffected = IExpenseDao.addExpense(title, category, amount, incurred);
+
+                Methods.rowsAffectedMessage(rowsAffected, "Successfully added details...");
             }
             else {
                 // addIncome()...
@@ -138,8 +139,9 @@ public class Main {
                 System.out.println("Finally, please enter the date you spent this (YYYY-MM-DD)");
                 earned = Methods.validateDate();
 
-                IIncomeDao.addIncome(title, amount, earned);
-                System.out.println("Successfully added details...");
+                int rowsAffected = IIncomeDao.addIncome(title, amount, earned);
+
+                Methods.rowsAffectedMessage(rowsAffected, "Successfully added details...");
             }
 
             System.out.println();
@@ -158,16 +160,18 @@ public class Main {
                 System.out.println("\nPlease enter the row ID you would like to delete:");
                 int id = sc.nextInt();
 
-                IExpenseDao.deleteExpenseById(id);
-                System.out.println("Successfully deleted row with ID " +id);
+                int rowsAffected = IExpenseDao.deleteExpenseById(id);
+
+                Methods.rowsAffectedMessage(rowsAffected, "Successfully deleted row with provided id");
             }
             else {
                 // deleteIncomeById()
                 System.out.println("\nPlease enter the row ID you would like to delete:");
                 int id = Methods.validateInt();
 
-                IIncomeDao.deleteIncomeById(id);
-                System.out.println("Successfully deleted row with ID " +id);
+                int rowsAffected = IIncomeDao.deleteIncomeById(id);
+
+                Methods.rowsAffectedMessage(rowsAffected, "Successfully deleted row with provided id");
             }
 
             System.out.println();
