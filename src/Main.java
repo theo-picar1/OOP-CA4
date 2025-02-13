@@ -11,11 +11,15 @@ import Exceptions.DaoException;
 import java.util.Scanner;
 
 import java.util.List;
+
 public class Main {
     static IncomeDaoInterface IIncomeDao = new MySqlIncomeDao();
     static ExpenseDaoInterface IExpenseDao = new MySqlExpenseDao();
 
     static Scanner sc = new Scanner(System.in);
+
+//    static double totalSpent = 0;
+//    static double totalEarned = 0;
 
     public static void main(String[] args) {
         System.out.println("EXPENSE & INCOME DATABASE (OOP CA4)");
@@ -32,12 +36,14 @@ public class Main {
                 "Display 'Income' table",
                 "Add income",
                 "Delete income",
+                "Total income in month",
+                "Total expense in month",
                 "End application"
         };
 
         Methods.menuOptions(options);
 
-        int choice = Methods.validateRange(1, 7);
+        int choice = Methods.validateRange(1, 9);
 
         if(choice == 1 || choice == 4) {
             displayATable(choice);
@@ -48,6 +54,9 @@ public class Main {
         else if(choice == 3 || choice == 6) {
             deleteRowFromTable(choice);
         }
+        else if(choice == 7 || choice == 8) {
+            displayTotalFromMonth(choice);
+        }
         else {
             System.out.println("Disconnecting from the database...\nDone! Goodbye");
         }
@@ -56,10 +65,12 @@ public class Main {
     // SELECT * FROM tableName
     public static void displayATable(int choice) {
         try {
+            double totalSpent = 0;
+            double totalEarned = 0;
+
             if (choice == 1) {
                 // findAllExpenses()...
                 System.out.println("Executing findAllExpenses()...");
-                double totalSpent = 0;
 
                 List<Expense> expenseList = IExpenseDao.findAllExpenses();
 
@@ -78,7 +89,6 @@ public class Main {
                 // findAllIncome()...
                 System.out.println("\nExecuting findAllIncome()...");
                 List<Income> incomeList = IIncomeDao.findAllIncome();
-                double totalEarned = 0;
 
                 if(incomeList.isEmpty()) {
                     System.out.println("Income table is empty! Please add some data first.");
@@ -155,26 +165,53 @@ public class Main {
     // DELETE FROM tableName WHERE ID = x
     public static void deleteRowFromTable(int choice) {
         try {
+            System.out.println("\nPlease enter the row ID you would like to delete:");
+            int id = Methods.validateInt();
+
             if(choice == 3) {
                 // deleteExpenseById()
-                System.out.println("\nPlease enter the row ID you would like to delete:");
-                int id = sc.nextInt();
-
                 int rowsAffected = IExpenseDao.deleteExpenseById(id);
 
                 Methods.rowsAffectedMessage(rowsAffected, "Successfully deleted row with provided id");
             }
             else {
                 // deleteIncomeById()
-                System.out.println("\nPlease enter the row ID you would like to delete:");
-                int id = Methods.validateInt();
-
                 int rowsAffected = IIncomeDao.deleteIncomeById(id);
 
                 Methods.rowsAffectedMessage(rowsAffected, "Successfully deleted row with provided id");
             }
 
             System.out.println();
+            menu();
+        }
+        catch(DaoException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void displayTotalFromMonth(int choice) {
+        try {
+            System.out.println("Please enter your month as a number (e.g. January = 1)");
+            int month = Methods.validateRange(1, 12);
+
+            String monthString = Methods.getMonth(month);
+
+            double totalIncome;
+            double totalExpense;
+
+            if (choice == 7) {
+                // Income
+                totalExpense = IIncomeDao.getTotalByMonth(month);
+
+                System.out.println("You spent a total of € " +totalExpense+ " in " +monthString);
+            }
+            else {
+                // Expense
+                totalIncome = IExpenseDao.getTotalByMonth(month);
+
+                System.out.println("You spent a total of € " +totalIncome+ " in " +monthString);
+            }
+
             menu();
         }
         catch(DaoException e) {

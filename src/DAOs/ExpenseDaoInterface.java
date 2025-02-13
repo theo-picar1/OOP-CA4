@@ -11,4 +11,6 @@ public interface ExpenseDaoInterface {
     int addExpense(String title, String category, double amount, String incurred) throws DaoException;
 
     int deleteExpenseById(int id) throws DaoException;
+
+    double getTotalByMonth(int id) throws DaoException;
 }

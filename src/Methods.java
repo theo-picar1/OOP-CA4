@@ -101,4 +101,23 @@ public class Methods {
             System.err.println("0 rows affected in table");
         }
     }
+
+    public static String getMonth(int num) {
+        String[] months = {
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December",
+        };
+
+        return months[num-1];
+    }
 }

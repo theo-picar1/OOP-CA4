@@ -135,4 +135,46 @@ public class MySqlIncomeDao extends MySqlDao implements IncomeDaoInterface {
 
         return rowsAffected;
     }
+
+    @Override
+    public double getTotalByMonth(int month) throws DaoException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet;
+        double total = 0.0;
+
+        try {
+            connection = this.getConnection();
+
+            // https://stackoverflow.com/questions/851236/how-to-write-a-where-clause-to-find-all-records-in-a-specific-month
+            String retrieveQuery = "SELECT SUM(amount) FROM Income WHERE MONTH(earned) = ?";
+            preparedStatement = connection.prepareStatement(retrieveQuery);
+
+            preparedStatement.setInt(1, month);
+
+            resultSet = preparedStatement.executeQuery();
+
+            if(resultSet.next()) {
+                total = resultSet.getDouble(1);
+            }
+        }
+        catch(SQLException e) {
+            throw new DaoException("getTotalByMonth() error!" +e.getMessage());
+        }
+        finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                if (connection != null) {
+                    freeConnection(connection);
+                }
+            }
+            catch (SQLException e) {
+                throw new DaoException("deleteExpenseById() error!" + e.getMessage());
+            }
+        }
+
+        return total;
+    }
 }
