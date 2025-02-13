@@ -13,3 +13,6 @@ Date String Regex (YYYY-MM-DD)
 
 Filter Month SQL
   - https://stackoverflow.com/questions/851236/how-to-write-a-where-clause-to-find-all-records-in-a-specific-month
+
+SUM SQL
+  - https://www.w3schools.com/sql/sql_sum.asp
