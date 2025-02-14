@@ -9,8 +9,9 @@ import DTOs.Expense;
 import Exceptions.DaoException;
 
 import java.util.Scanner;
-
 import java.util.List;
+
+import java.sql.Date;
 
 public class Main {
     static IncomeDaoInterface IIncomeDao = new MySqlIncomeDao();
@@ -30,15 +31,15 @@ public class Main {
 
     public static void menu() {
         String[] options = {
-                "Display 'Expenses' table",
-                "Add expense",
-                "Delete expense",
-                "Display 'Income' table",
-                "Add income",
-                "Delete income",
-                "Total income in month",
-                "Total expense in month",
-                "End application"
+            "Display 'Expenses' table",
+            "Add expense",
+            "Delete expense",
+            "Display 'Income' table",
+            "Add income",
+            "Delete income",
+            "Total income in month",
+            "Total expense in month",
+            "End application"
         };
 
         Methods.menuOptions(options);
@@ -116,40 +117,17 @@ public class Main {
         try {
             if(choice == 2) {
                 // addExpense()...
-                String title, category, incurred;
-                double amount;
+                Expense expense = Methods.expenseFields();
 
-                System.out.println("Please enter your new title...");
-                title = Methods.validateString();
-
-                System.out.println("Please enter the amount you spent");
-                amount = Methods.validateAmount();
-
-                System.out.println("Please enter the date you spent this (YYYY-MM-DD)");
-                incurred = Methods.validateDate();
-
-                System.out.println("Finally, please enter your new category...");
-                category = Methods.validateString();
-
-                int rowsAffected = IExpenseDao.addExpense(title, category, amount, incurred);
+                int rowsAffected = IExpenseDao.addExpense(expense.getTitle(), expense.getCategory(), expense.getAmount(), expense.getDate());
 
                 Methods.rowsAffectedMessage(rowsAffected, "Successfully added details...");
             }
             else {
                 // addIncome()...
-                String title, earned;
-                double amount;
+                Income income = Methods.incomeFields();
 
-                System.out.println("Please enter your new title...");
-                title = Methods.validateString();
-
-                System.out.println("Please enter the amount you spent");
-                amount = Methods.validateAmount();
-
-                System.out.println("Finally, please enter the date you spent this (YYYY-MM-DD)");
-                earned = Methods.validateDate();
-
-                int rowsAffected = IIncomeDao.addIncome(title, amount, earned);
+                int rowsAffected = IIncomeDao.addIncome(income.getTitle(), income.getAmount(), income.getDate());
 
                 Methods.rowsAffectedMessage(rowsAffected, "Successfully added details...");
             }
