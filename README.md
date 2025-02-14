@@ -1,5 +1,5 @@
 # OOP-CA4
-You are required to develop an application in Java that helps you keep track of your income and spending. This should be connected to a database with a table to store each expense, and a table to store income. Your solution must make use of DAOs and DTOs as shown in class.
+An application in Java that helps users keep track of their income and spending. It utilises a databases connection with a table to store each expense, and a table to store income. Code in the application makes use of DAOs and DTOs.
 
 # References
 Auto Incrementing ID's
