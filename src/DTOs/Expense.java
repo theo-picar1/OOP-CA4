@@ -9,13 +9,13 @@ public class Expense extends Income{
     private String category;
 
     // if ID is already known. Used for retrieving from database
-    public Expense(int id, String title, String category, double amount, Date incurred) {
+    public Expense(int id, String title, String category, double amount, String incurred) {
         super(id, title, amount, incurred);
         this.category = category;
     }
 
     // for creating a new one. ID is incremented here
-    public Expense(String title, String category, double amount, Date incurred) {
+    public Expense(String title, String category, double amount, String incurred) {
         super(title, amount, incurred);
         this.category = category;
     }

@@ -10,10 +10,10 @@ public class Income {
     private int id; // auto-incremented
     private String title;
     private double amount;
-    private Date earned;
+    private String earned;
 
     // if ID is already known. Used for retrieving from database
-    public Income(int id, String title, double amount, Date earned) {
+    public Income(int id, String title, double amount, String earned) {
         this.id = id;
         this.title = title;
         this.amount = amount;
@@ -21,7 +21,7 @@ public class Income {
     }
 
     // for creating a new one. ID is incremented here
-    public Income(String title, double amount, Date earned) {
+    public Income(String title, double amount, String earned) {
         this.id = count.incrementAndGet();
         this.title = title;
         this.amount = amount;
@@ -55,11 +55,11 @@ public class Income {
         this.amount = amount;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return earned;
     }
 
-    public void setDate(Date earned) {
+    public void setDate(String earned) {
         this.earned = earned;
     }
 

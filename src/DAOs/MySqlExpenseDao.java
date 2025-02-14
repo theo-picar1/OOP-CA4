@@ -34,7 +34,7 @@ public class MySqlExpenseDao extends MySqlDao implements ExpenseDaoInterface{
                 double amount = resultSet.getDouble("amount");
                 Date dateEarned = resultSet.getDate("incurred");
 
-                Expense income = new Expense(id, title, category, amount, dateEarned);
+                Expense income = new Expense(id, title, category, amount, dateEarned.toString());
                 expenseList.add(income);
             }
         }

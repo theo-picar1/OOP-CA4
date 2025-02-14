@@ -34,7 +34,7 @@ public class MySqlIncomeDao extends MySqlDao implements IncomeDaoInterface {
                 double amount = resultSet.getDouble("amount");
                 Date dateEarned = resultSet.getDate("earned");
 
-                Income income = new Income(id, title, amount, dateEarned);
+                Income income = new Income(id, title, amount, dateEarned.toString());
                 incomeList.add(income);
             }
         }
