@@ -84,7 +84,7 @@ public class Main {
                     }
                 }
 
-                System.out.println("Total money spent is: €" + totalSpent);
+                System.out.println("Total money spent is: €" + Math.floor(totalSpent * 100) / 100);
             }
             else {
                 // findAllIncome()...
@@ -101,7 +101,7 @@ public class Main {
                     }
                 }
 
-                System.out.println("Total money earned is: €" +totalEarned);
+                System.out.println("Total money earned is: €" +Math.floor(totalEarned * 100) / 100);
             }
 
             System.out.println();

@@ -3,6 +3,8 @@ import DTOs.Income;
 
 import java.util.Scanner;
 
+import static java.lang.Double.parseDouble;
+
 public class Methods {
     static Scanner sc = new Scanner(System.in);
 
@@ -55,8 +57,7 @@ public class Methods {
             if (sc.hasNextDouble()) {
                 input = sc.nextDouble();
 
-                https:
-//www.baeldung.com/java-double-round-two-decimal-places
+                // https:www.baeldung.com/java-double-round-two-decimal-places
                 return Math.floor(input * 100) / 100;
             } else {
                 System.out.println("Please enter only double values");
